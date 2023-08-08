@@ -35,6 +35,14 @@ if (!cacheConnection) {
   cacheConnection = global.mongooseCache = { conn: null, promise: null };
 }
 
+export const dbConnect = async () => {
+  return await mongoose
+    .connect(MONGO_URI, {
+      bufferCommands: false,
+    })
+    .then((mongoose) => mongoose);
+};
+
 export const connectToDatabase = async () => {
   if (cacheConnection.conn) return cacheConnection.conn;
 

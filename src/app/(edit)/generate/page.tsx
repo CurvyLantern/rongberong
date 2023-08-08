@@ -71,12 +71,18 @@ const GeneratePage = () => {
 
   const saveThisPalette = async () => {
     console.log(hexColorArrState);
+
+    const bodyData = JSON.stringify({
+      paletteName: "",
+      palette: hexColorArrState,
+    });
+    console.log({ bodyData });
     const res = await fetch("/api/v1/persistPalette", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(hexColorArrState),
+      body: bodyData,
     });
     const data = await res.json();
     console.log({ data }, "from server");

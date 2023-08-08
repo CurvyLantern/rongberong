@@ -6,7 +6,7 @@ import ColorPaletteCard from "../components/ColorPaletteCard";
 import { Button } from "@/ui/ui/button";
 import styles from "@/styles/gradient.module.css";
 import { useMouse } from "react-use";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function HomePage() {
   const ref = useRef<HTMLDivElement>(null);
@@ -41,6 +41,26 @@ export default function HomePage() {
       clearInterval(intervalId);
     };
   }, []);
+
+  const [palettes, setPalettes] = useState([]);
+  useEffect(() => {
+    const fetcher = async () => {
+      const { data: serverPalettes } = await fetch(
+        "api/v1/persistPalette"
+      ).then((res) => res.json());
+
+      console.log({ serverPalettes });
+      const _palette = serverPalettes.map((sp: any) => ({
+        id: sp._id,
+        paletteName: sp.paletteName,
+        palette: sp.palette,
+      }));
+      setPalettes(_palette);
+    };
+
+    fetcher();
+  }, []);
+
   return (
     <main className="flex flex-col mb-40">
       {/* hero section */}
@@ -56,11 +76,14 @@ export default function HomePage() {
       </section>
 
       <div className="container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
-        {Array(100)
-          .fill(0)
-          .map((_, idx) => {
-            return <ColorPaletteCard key={idx} />;
-          })}
+        {palettes.map((palette, idx) => {
+          return (
+            <ColorPaletteCard
+              key={idx}
+              paletteData={palette}
+            />
+          );
+        })}
       </div>
     </main>
   );

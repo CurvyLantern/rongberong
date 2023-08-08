@@ -1,7 +1,12 @@
 import { avgHsl, hslToHex } from "@/lib/utils";
 import { useState } from "react";
 import { TbHeart, TbHeartFilled } from "react-icons/tb";
-const ColorPaletteCard = () => {
+
+interface ColorPaletteCardProps {
+  paletteData: Palette;
+}
+const ColorPaletteCard: React.FC<ColorPaletteCardProps> = ({ paletteData }) => {
+  console.log({ paletteData });
   const colors: Array<COLOR> = [
     { type: "hsl", a: 1, h: 1, l: 45, s: 80 },
     { type: "hsl", a: 1, h: 100, l: 35, s: 50 },
@@ -18,9 +23,9 @@ const ColorPaletteCard = () => {
     <div className="flex flex-col">
       <div className="aspect-video overflow-hidden rounded-md flex bg-white w-full ">
         {/* color columns */}
-        {colors.map((color, colorIdx) => {
+        {paletteData.palette.map((color, colorIdx) => {
           return (
-            <ColorPaletteCard.column
+            <ColorPaletteCardColumn
               color={color}
               key={colorIdx}
             />
@@ -29,7 +34,7 @@ const ColorPaletteCard = () => {
       </div>
       {/* contents */}
       <div className="flex items-center ">
-        <p className="text-sm font-semibold py-2">Raw green platter</p>
+        <p className="text-sm font-semibold py-2">{paletteData.paletteName}</p>
 
         <button
           onClick={iLoveThis}
@@ -43,32 +48,29 @@ const ColorPaletteCard = () => {
 };
 
 interface ColorPaletteCardColumnProps {
-  color: COLOR;
+  color: HEX_WITH_NAME;
 }
 const ColorPaletteCardColumn: React.FC<ColorPaletteCardColumnProps> = ({
   color,
 }) => {
-  let colorStr = "";
-  if (color.type === "hsl") {
-    colorStr = hslToHex(color);
-  }
+  // let colorStr = "";
+  // if (color.type === "hsl") {
+  //   colorStr = hslToHex(color);
+  // }
 
   return (
     <div
       className="flex items-center justify-center flex-1 hover:cursor-pointer transition-all group relative"
       style={{
-        backgroundColor: colorStr,
+        backgroundColor: color.code,
       }}>
       {/* group-hover:opacity-100 opacity-0  */}
       <p className="text-sm font-semibold w-0 group-hover:w-auto px-2 hidden group-hover:block transition-all">
-        {colorStr}
+        {color.code}
       </p>
     </div>
   );
 };
 
-ColorPaletteCard.column = ColorPaletteCardColumn;
-ColorPaletteCard.displayName = "ColorPaletteCard";
-ColorPaletteCardColumn.displayName = "ColorPaletteCardColumn";
 
 export default ColorPaletteCard;

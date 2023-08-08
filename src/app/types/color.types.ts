@@ -27,3 +27,7 @@ interface HEX {
   type: "hex";
   code: string;
 }
+interface Palette {
+  paletteName: string;
+  palette: Array<HEX_WITH_NAME>;
+}
