@@ -1,12 +1,10 @@
 "use client";
 
 // import { hslToHex, hslToRgb } from "@/lib/utils";
-import Image from "next/image";
-import ColorPaletteCard from "../components/ColorPaletteCard";
-import { Button } from "@/ui/ui/button";
 import styles from "@/styles/gradient.module.css";
-import { useMouse } from "react-use";
 import { useEffect, useRef, useState } from "react";
+import { useMouse } from "react-use";
+import ColorPaletteCard from "../components/ColorPaletteCard";
 
 export default function HomePage() {
   const ref = useRef<HTMLDivElement>(null);
