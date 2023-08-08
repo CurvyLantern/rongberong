@@ -14,6 +14,14 @@ import {
 import { useCopyToClipboard } from "react-use";
 import { cp } from "fs";
 
+
+export const metadata = {
+  title: "Rongberong - color palettes",
+  description: "A free website to gather cool palettes",
+};
+
+
+
 const colors: Array<COLOR> = [
   { type: "hsl", a: 1, h: 1, l: 45, s: 80 },
   { type: "hsl", a: 1, h: 100, l: 35, s: 50 },
