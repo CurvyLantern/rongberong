@@ -1,11 +1,16 @@
 import { Button } from "@/ui/ui/button";
+import Link from "next/link";
 
 const BaseHeader = () => {
   return (
     <div className="py-5 px-5 shadow-md flex justify-between">
       <Logo />
 
-      <Button className="uppercase">Generate your own palette</Button>
+      <Button
+        asChild
+        className="uppercase">
+        <Link href="/generate">Generate your own palette</Link>
+      </Button>
     </div>
   );
 };

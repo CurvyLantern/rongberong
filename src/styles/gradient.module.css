@@ -1,0 +1,15 @@
+.gradient {
+    background-image: linear-gradient(
+        var(--angle, 0deg),
+        rgba(0,255,209,.5),
+        rgba(170,70,252,.69)
+    ),
+    radial-gradient(
+        circle at var(--mousex) var(--mousey),
+        rgba(255,255,255,.5),
+        rgba(0,0,0,.5)
+    ),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 9 9' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.22' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+
+    filter: contrast(160%) brightness(300%);
+}

@@ -1,5 +1,9 @@
 type COLOR = RGB | HSL | HSB | HEX;
 
+interface HEX_WITH_NAME extends HEX {
+  name: string;
+}
+
 interface RGB {
   type: "rgb";
   r: number;

@@ -1,5 +1,6 @@
 import { avgHsl, hslToHex } from "@/lib/utils";
-
+import { useState } from "react";
+import { TbHeart, TbHeartFilled } from "react-icons/tb";
 const ColorPaletteCard = () => {
   const colors: Array<COLOR> = [
     { type: "hsl", a: 1, h: 1, l: 45, s: 80 },
@@ -8,6 +9,11 @@ const ColorPaletteCard = () => {
     { type: "hsl", a: 1, h: 75, l: 15, s: 100 },
     { type: "hsl", a: 1, h: 350, l: 85, s: 70 },
   ];
+  // this will come from the database later
+  const [iLove, setILove] = useState(false);
+  const iLoveThis = () => {
+    setILove((p) => !p);
+  };
   return (
     <div className="flex flex-col">
       <div className="aspect-video overflow-hidden rounded-md flex bg-white w-full ">
@@ -22,8 +28,15 @@ const ColorPaletteCard = () => {
         })}
       </div>
       {/* contents */}
-      <div>
+      <div className="flex items-center ">
         <p className="text-sm font-semibold py-2">Raw green platter</p>
+
+        <button
+          onClick={iLoveThis}
+          className="flex gap-2 items-center justify-center ml-auto">
+          {iLove ? <TbHeartFilled className="text-red-500" /> : <TbHeart />}{" "}
+          <p className="text-sm">10k</p>
+        </button>
       </div>
     </div>
   );
@@ -47,7 +60,7 @@ const ColorPaletteCardColumn: React.FC<ColorPaletteCardColumnProps> = ({
         backgroundColor: colorStr,
       }}>
       {/* group-hover:opacity-100 opacity-0  */}
-      <p className="text-sm font-bold w-0 group-hover:w-auto px-2 hidden group-hover:block transition-all">
+      <p className="text-sm font-semibold w-0 group-hover:w-auto px-2 hidden group-hover:block transition-all">
         {colorStr}
       </p>
     </div>
