@@ -1,5 +1,7 @@
+"use client";
 import { hslToHex } from "@/lib/utils";
 import ColorPaletteCard from "../../components/ColorPaletteCard";
+import { useEffect, useState } from "react";
 
 const DetailsPage = () => {
   const colors: Array<COLOR> = [
@@ -9,6 +11,26 @@ const DetailsPage = () => {
     { type: "hsl", a: 1, h: 75, l: 15, s: 100 },
     { type: "hsl", a: 1, h: 350, l: 85, s: 70 },
   ];
+
+  const [palettes, setPalettes] = useState([]);
+  useEffect(() => {
+    const fetcher = async () => {
+      const { data: serverPalettes } = await fetch(
+        "api/v1/persistPalette"
+      ).then((res) => res.json());
+
+      console.log({ serverPalettes });
+      const _palette = serverPalettes.map((sp: any) => ({
+        id: sp._id,
+        paletteName: sp.paletteName,
+        palette: sp.palette,
+      }));
+      setPalettes(_palette);
+    };
+
+    fetcher();
+  }, []);
+
   return (
     <div className="container">
       {/* title */}
@@ -45,11 +67,14 @@ const DetailsPage = () => {
       </h2>
 
       <div className="container grid grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {Array(100)
-          .fill(0)
-          .map((_, idx) => {
-            return <ColorPaletteCard key={idx} />;
-          })}
+        {palettes.map((palette, idx) => {
+          return (
+            <ColorPaletteCard
+              key={idx}
+              paletteData={palette}
+            />
+          );
+        })}
       </div>
     </div>
   );

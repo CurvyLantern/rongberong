@@ -1,4 +1,4 @@
-import { avgHsl, hslToHex } from "@/lib/utils";
+"use client";
 import { useState } from "react";
 import { TbHeart, TbHeartFilled } from "react-icons/tb";
 
@@ -71,6 +71,5 @@ const ColorPaletteCardColumn: React.FC<ColorPaletteCardColumnProps> = ({
     </div>
   );
 };
-
 
 export default ColorPaletteCard;
