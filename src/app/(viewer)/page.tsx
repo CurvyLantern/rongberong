@@ -1,6 +1,6 @@
 // import { hslToHex, hslToRgb } from "@/lib/utils";
 import Image from "next/image";
-import ColorPaletteCard from "./components/ColorPaletteCard";
+import ColorPaletteCard from "../components/ColorPaletteCard";
 
 export default function HomePage() {
   return (

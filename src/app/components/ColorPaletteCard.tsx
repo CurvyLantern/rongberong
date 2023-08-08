@@ -42,11 +42,12 @@ const ColorPaletteCardColumn: React.FC<ColorPaletteCardColumnProps> = ({
 
   return (
     <div
-      className="flex items-center justify-center flex-1 hover:flex-3 hover:cursor-pointer transition-all group relative"
+      className="flex items-center justify-center flex-1 hover:cursor-pointer transition-all group relative"
       style={{
         backgroundColor: colorStr,
       }}>
-      <p className="text-sm font-bold group-hover:opacity-100 opacity-0 absolute">
+      {/* group-hover:opacity-100 opacity-0  */}
+      <p className="text-sm font-bold w-0 group-hover:w-auto px-2 hidden group-hover:block transition-all">
         {colorStr}
       </p>
     </div>
